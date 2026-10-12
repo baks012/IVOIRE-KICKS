@@ -1,7 +1,7 @@
 <?php
 /**
  * =========================================================================
- * KICKORA - Traitement Sécurisé des Commandes Clients (PHP / MySQL)
+ * IVOIRE KICKS - Traitement Sécurisé des Commandes Clients (PHP / MySQL)
  * Enregistrement des paiements Wave, OM, MTN & Cash à la livraison
  * =========================================================================
  */
@@ -28,7 +28,7 @@ if (!$pdo) {
 }
 
 // Extraction et assainissement des champs
-$orderRef      = !empty($input['reference']) ? htmlspecialchars(trim($input['reference'])) : 'KCK-CI-' . rand(10000, 99999);
+$orderRef      = !empty($input['reference']) ? htmlspecialchars(trim($input['reference'])) : 'IVK-CI-' . rand(10000, 99999);
 $customerName  = !empty($input['customer']['name']) ? htmlspecialchars(trim($input['customer']['name'])) : '';
 $customerPhone = !empty($input['customer']['phone']) ? htmlspecialchars(trim($input['customer']['phone'])) : '';
 $customerCity  = !empty($input['customer']['city']) ? htmlspecialchars(trim($input['customer']['city'])) : 'Abidjan';
@@ -85,7 +85,7 @@ try {
         ");
 
         foreach ($items as $item) {
-            $pName  = !empty($item['name']) ? htmlspecialchars($item['name']) : 'Sneaker KICKORA';
+            $pName  = !empty($item['name']) ? htmlspecialchars($item['name']) : 'Sneaker IVOIRE KICKS';
             $pSize  = !empty($item['size']) ? htmlspecialchars($item['size']) : '42';
             $pQty   = isset($item['quantity']) ? max(1, intval($item['quantity'])) : 1;
             $pPrice = isset($item['price']) ? intval($item['price']) : 0;
@@ -112,7 +112,7 @@ try {
         'order_ref' => $orderRef,
         'total' => $total,
         'payment_method' => $paymentMethod
-    ], 'Votre commande a été enregistrée avec succès chez KICKORA !', 201);
+    ], 'Votre commande a été enregistrée avec succès chez IVOIRE KICKS !', 201);
 
 } catch (Exception $e) {
     if ($pdo->inTransaction()) {

@@ -1,9 +1,9 @@
 /**
  * =========================================================================
- * KICKORA - Configuration & Intégration Supabase (Côte d'Ivoire)
+ * IVOIRE KICKS - Configuration & Intégration Supabase (Côte d'Ivoire)
  * =========================================================================
  * Ce fichier gère la persistance en temps réel dans votre base Supabase :
- * - Enregistrement des commandes clients (Wave, OM, MTN, Cash)
+ * - Enregistrement des commandes clients (Wave, OM, MTN, SasPay, Cash)
  * - Récupération dynamique des produits
  * - Avis clients vérifiés
  *
@@ -32,12 +32,12 @@ let supabaseClient = null;
 if (typeof window.supabase !== 'undefined' && SUPABASE_CONFIG.isConfigured()) {
     try {
         supabaseClient = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
-        console.log('✅ KICKORA : Connecté avec succès à Supabase Cloud');
+        console.log('✅ IVOIRE KICKS : Connecté avec succès à Supabase Cloud');
     } catch (e) {
-        console.warn('⚠️ KICKORA : Impossible d\'initialiser Supabase. Mode local actif.', e);
+        console.warn('⚠️ IVOIRE KICKS : Impossible d\'initialiser Supabase. Mode local actif.', e);
     }
 } else {
-    console.info('ℹ️ KICKORA : Mode démonstration actif. Pour activer la sauvegarde cloud, renseignez vos clés dans supabase.js');
+    console.info('ℹ️ IVOIRE KICKS : Mode démonstration actif. Pour activer la sauvegarde cloud, renseignez vos clés dans supabase.js');
 }
 
 /**
@@ -48,13 +48,13 @@ if (typeof window.supabase !== 'undefined' && SUPABASE_CONFIG.isConfigured()) {
 async function saveOrderToSupabase(orderData) {
     if (!supabaseClient) {
         // Enregistrement local de secours (LocalStorage)
-        const localOrders = JSON.parse(localStorage.getItem('kickora_orders') || '[]');
+        const localOrders = JSON.parse(localStorage.getItem('ivoire_kicks_orders') || localStorage.getItem('kickora_orders') || '[]');
         localOrders.push({
             ...orderData,
             saved_at: new Date().toISOString(),
             storage_type: 'local_storage_backup'
         });
-        localStorage.setItem('kickora_orders', JSON.stringify(localOrders));
+        localStorage.setItem('ivoire_kicks_orders', JSON.stringify(localOrders));
         
         return {
             success: true,
@@ -120,9 +120,9 @@ async function saveOrderToSupabase(orderData) {
         console.error('Erreur Supabase Order:', error);
         
         // Sauvegarde de secours en cas d'erreur réseau
-        const localOrders = JSON.parse(localStorage.getItem('kickora_orders') || '[]');
+        const localOrders = JSON.parse(localStorage.getItem('ivoire_kicks_orders') || localStorage.getItem('kickora_orders') || '[]');
         localOrders.push(orderData);
-        localStorage.setItem('kickora_orders', JSON.stringify(localOrders));
+        localStorage.setItem('ivoire_kicks_orders', JSON.stringify(localOrders));
 
         return {
             success: true,
@@ -155,8 +155,11 @@ async function getProductsFromSupabase() {
 }
 
 // Exposer globalement
-window.KICKORA_SUPABASE = {
+window.IVOIRE_KICKS_SUPABASE = {
     saveOrder: saveOrderToSupabase,
     getProducts: getProductsFromSupabase,
     isReady: () => !!supabaseClient
 };
+
+// Alias de compatibilité
+window.KICKORA_SUPABASE = window.IVOIRE_KICKS_SUPABASE;

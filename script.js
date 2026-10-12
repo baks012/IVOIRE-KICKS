@@ -1,26 +1,43 @@
 /**
  * =========================================================================
- * KICKORA - Logique E-commerce & Paiements Côte d'Ivoire
+ * IVOIRE KICKS - Logique E-commerce & Paiements Côte d'Ivoire
  * =========================================================================
  * - Gestion du panier (Ajout, suppression, quantités, pointures)
  * - Gestion des favoris (Wishlist)
  * - Slider Hero & Galerie des produits vedettes
  * - Calcul dynamique des frais de livraison (Abidjan vs Intérieur)
- * - Intégration Wave, Orange Money, MTN MoMo, Cash
+ * - Intégration SasPay, Wave CI, Orange Money, MTN MoMo, Cash
  * - Synchronisation Supabase & API PHP
  * - Confirmation instantanée par WhatsApp
  * =========================================================================
  */
 
-// Configuration boutique
-const KICKORA_STORE = {
+// Configuration boutique IVOIRE KICKS
+const IVOIRE_KICKS_STORE = {
   name: "IVOIRE KICKS",
-  whatsappPhone: "2250700000000", // Numéro WhatsApp du vendeur à Abidjan (+225)
-  wavePaymentNumber: "07 00 00 00 00", // Numéro Wave marchand
+  email: "sorybakayoko012@gmail.com",
+  phoneDisplay: "+225 05 56 96 78 45",
+  whatsappPhone: "2250556967845", // Numéro WhatsApp marchand (+225)
+  wavePaymentNumber: "05 56 96 78 45", // Numéro Wave marchand
+  waveDirectUrl: "https://wave.com/send?phone=+2250556967845",
   orangeMoneyCode: "#144#",
   mtnMoneyCode: "*133#",
   freeShippingThreshold: 70000 // Livraison offerte dès 70 000 FCFA
 };
+
+// Configuration Passerelle SasPay (Wave, OM, MTN, Moov, CB)
+const SASPAY_CONFIG = {
+  apiKey: "sas_live_sorybakayoko012",
+  merchantName: "IVOIRE KICKS",
+  apiUrl: "https://api.saspay.me/v1/payments",
+  checkoutUrl: "https://checkout.saspay.me",
+  isConfigured: function() {
+    return Boolean(this.apiKey && this.apiKey !== "YOUR_SASPAY_API_KEY");
+  }
+};
+
+// Alias de compatibilité
+const KICKORA_STORE = IVOIRE_KICKS_STORE;
 
 // Catalogue local des produits (synchronisable avec Supabase)
 const PRODUCTS_DATA = [
@@ -99,8 +116,8 @@ const PRODUCTS_DATA = [
 ];
 
 // État de l'application
-let cart = JSON.parse(localStorage.getItem('kickora_cart') || '[]');
-let wishlist = JSON.parse(localStorage.getItem('kickora_wishlist') || '[]');
+let cart = JSON.parse(localStorage.getItem('ivoire_kicks_cart') || localStorage.getItem('kickora_cart') || '[]');
+let wishlist = JSON.parse(localStorage.getItem('ivoire_kicks_wishlist') || localStorage.getItem('kickora_wishlist') || '[]');
 
 // =========================================================================
 // 1. MENU MOBILE & NAVIGATION
@@ -210,7 +227,7 @@ function formatFCFA(amount) {
 // 5. GESTION DU PANIER (CART)
 // =========================================================================
 function saveCart() {
-  localStorage.setItem('kickora_cart', JSON.stringify(cart));
+  localStorage.setItem('ivoire_kicks_cart', JSON.stringify(cart));
   updateCartBadge();
   renderCartDrawer();
 }
@@ -352,7 +369,7 @@ function toggleWishlist(productId) {
     showToast(`❤️ ${name} ajouté à vos favoris !`, 'success');
   }
 
-  localStorage.setItem('kickora_wishlist', JSON.stringify(wishlist));
+  localStorage.setItem('ivoire_kicks_wishlist', JSON.stringify(wishlist));
   updateWishlistBadge();
 }
 
@@ -402,7 +419,7 @@ function closeCheckoutModal() {
 
 function calculateShippingFee(city, commune) {
   const subtotal = getCartSubtotal();
-  if (subtotal >= KICKORA_STORE.freeShippingThreshold) {
+  if (subtotal >= IVOIRE_KICKS_STORE.freeShippingThreshold) {
     return 0; // Livraison offerte dès 70 000 FCFA
   }
 
@@ -488,7 +505,7 @@ if (checkoutForm) {
     const subtotal = getCartSubtotal();
     const shippingFee = calculateShippingFee(city, commune);
     const total = subtotal + shippingFee;
-    const orderRef = 'KCK-CI-' + Math.floor(10000 + Math.random() * 90000);
+    const orderRef = 'IVK-CI-' + Math.floor(10000 + Math.random() * 90000);
 
     const orderPayload = {
       reference: orderRef,
@@ -515,8 +532,9 @@ if (checkoutForm) {
 
     try {
       // 1. Sauvegarde dans Supabase
-      if (window.KICKORA_SUPABASE && typeof window.KICKORA_SUPABASE.saveOrder === 'function') {
-        await window.KICKORA_SUPABASE.saveOrder(orderPayload);
+      const supabaseApi = window.IVOIRE_KICKS_SUPABASE || window.KICKORA_SUPABASE;
+      if (supabaseApi && typeof supabaseApi.saveOrder === 'function') {
+        await supabaseApi.saveOrder(orderPayload);
       }
 
       // 2. Sauvegarde parallèle dans l'API PHP MySQL locale si active
@@ -571,34 +589,54 @@ function openSuccessModal(orderData) {
 
   // Instructions selon moyen de paiement
   if (instructionsEl) {
-    if (orderData.paymentMethod === 'wave') {
+    if (orderData.paymentMethod === 'saspay') {
+      instructionsEl.innerHTML = `
+        <div style="color:#0b7bc4; font-weight:800; font-size:1.6rem; margin-bottom:0.5rem;">⚡ Paiement via SasPay Côte d'Ivoire</div>
+        <p>Réglez rapidement et en toute sécurité via <strong>Wave, Orange Money, MTN MoMo, Moov ou Carte Bancaire</strong>.</p>
+        <div style="font-size:1.8rem; font-weight:900; color:#0b7bc4; background:#EBF5FB; padding:0.8rem 1.2rem; border-radius:8px; margin:0.8rem 0; text-align:center;">
+          Total : ${formatFCFA(orderData.total)}
+        </div>
+        <div style="display:flex; flex-direction:column; gap:0.8rem; margin:1rem 0;">
+          <a href="${IVOIRE_KICKS_STORE.waveDirectUrl}" target="_blank" class="btn" style="background:#1DA1F2; color:#fff; text-align:center; padding:1rem; border-radius:6px; font-weight:700;">
+            🌊 Payer directement par Wave (${IVOIRE_KICKS_STORE.wavePaymentNumber})
+          </a>
+          <button type="button" class="btn" onclick="initiateSasPayPayment('${orderData.reference}', ${orderData.total})" style="background:linear-gradient(135deg, #0b7bc4, #ff6600); color:#fff; padding:1rem; border-radius:6px; font-weight:700;">
+            💳 Ouvrir le Guichet SasPay CI
+          </button>
+        </div>
+        <p style="font-size:1.2rem; color:var(--text-secondary); margin-top:0.4rem;">Référence de commande : <strong>${orderData.reference}</strong></p>
+      `;
+    } else if (orderData.paymentMethod === 'wave') {
       instructionsEl.innerHTML = `
         <div style="color:#0b7bc4; font-weight:800; font-size:1.6rem; margin-bottom:0.5rem;">🌊 Paiement via Wave Côte d'Ivoire</div>
         <p>1. Ouvrez votre application <strong>Wave CI</strong> sur votre smartphone.</p>
         <p>2. Envoyez le montant exact de <strong>${formatFCFA(orderData.total)}</strong> au numéro marchand :</p>
         <div style="font-size:1.8rem; font-weight:900; color:#0b7bc4; background:#EBF5FB; padding:0.8rem 1.2rem; border-radius:8px; margin:0.8rem 0; text-align:center;">
-          ${KICKORA_STORE.wavePaymentNumber}
+          ${IVOIRE_KICKS_STORE.wavePaymentNumber}
         </div>
+        <a href="${IVOIRE_KICKS_STORE.waveDirectUrl}" target="_blank" class="btn" style="background:#1DA1F2; color:#fff; display:block; text-align:center; padding:0.9rem; margin:0.8rem 0; border-radius:6px; font-weight:700;">
+          <i class="fas fa-external-link-alt"></i> Ouvrir Wave sur mon Téléphone
+        </a>
         <p>3. Mentionnez en motif : <strong>${orderData.reference}</strong></p>
       `;
     } else if (orderData.paymentMethod === 'orange_money') {
       instructionsEl.innerHTML = `
         <div style="color:#FF6600; font-weight:800; font-size:1.6rem; margin-bottom:0.5rem;">🟧 Paiement via Orange Money CI</div>
-        <p>1. Composez <strong>${KICKORA_STORE.orangeMoneyCode}</strong> sur votre mobile Orange ou ouvrez l'application <strong>Max it</strong>.</p>
-        <p>2. Transférez <strong>${formatFCFA(orderData.total)}</strong> au numéro KICKORA : <strong>${KICKORA_STORE.wavePaymentNumber}</strong></p>
+        <p>1. Composez <strong>${IVOIRE_KICKS_STORE.orangeMoneyCode}</strong> sur votre mobile Orange ou ouvrez l'application <strong>Max it</strong>.</p>
+        <p>2. Transférez <strong>${formatFCFA(orderData.total)}</strong> au numéro IVOIRE KICKS : <strong>${IVOIRE_KICKS_STORE.wavePaymentNumber}</strong></p>
         <p>3. Réf de commande : <strong>${orderData.reference}</strong></p>
       `;
     } else if (orderData.paymentMethod === 'mtn_money') {
       instructionsEl.innerHTML = `
         <div style="color:#B38F00; font-weight:800; font-size:1.6rem; margin-bottom:0.5rem;">🟨 Paiement via MTN Mobile Money (MoMo)</div>
-        <p>1. Composez <strong>${KICKORA_STORE.mtnMoneyCode}</strong> sur votre téléphone MTN.</p>
-        <p>2. Validez le paiement de <strong>${formatFCFA(orderData.total)}</strong> au compte KICKORA : <strong>${KICKORA_STORE.wavePaymentNumber}</strong></p>
+        <p>1. Composez <strong>${IVOIRE_KICKS_STORE.mtnMoneyCode}</strong> sur votre téléphone MTN.</p>
+        <p>2. Validez le paiement de <strong>${formatFCFA(orderData.total)}</strong> au compte IVOIRE KICKS : <strong>${IVOIRE_KICKS_STORE.wavePaymentNumber}</strong></p>
         <p>3. Indiquez la référence : <strong>${orderData.reference}</strong></p>
       `;
     } else {
       instructionsEl.innerHTML = `
         <div style="color:var(--green-ci); font-weight:800; font-size:1.6rem; margin-bottom:0.5rem;">💵 Paiement à la Livraison (Abidjan)</div>
-        <p>Votre commande est validée ! Notre livreur vous contactera par appel ou WhatsApp avant de passer.</p>
+        <p>Votre commande est validée ! Notre livreur vous contactera par appel ou WhatsApp au <strong>${IVOIRE_KICKS_STORE.phoneDisplay}</strong> avant de passer.</p>
         <p>Vous pourrez essayer la paire à la réception et régler en <strong>espèces ou par Wave</strong> directement au livreur.</p>
       `;
     }
@@ -608,7 +646,7 @@ function openSuccessModal(orderData) {
   if (whatsappBtn) {
     const itemsList = orderData.items.map(it => `• ${it.name} (Pt ${it.size}) x${it.quantity} = ${formatFCFA(it.price * it.quantity)}`).join('\n');
     const whatsappMessage = encodeURIComponent(
-      `🇨🇮 *NOUVELLE COMMANDE KICKORA*\n\n` +
+      `🇨🇮 *NOUVELLE COMMANDE IVOIRE KICKS*\n\n` +
       `*Réf :* ${orderData.reference}\n` +
       `*Client :* ${orderData.customer.name}\n` +
       `*Téléphone :* ${orderData.customer.phone}\n` +
@@ -622,11 +660,22 @@ function openSuccessModal(orderData) {
       `Merci de confirmer la livraison !`
     );
 
-    whatsappBtn.href = `https://wa.me/${KICKORA_STORE.whatsappPhone}?text=${whatsappMessage}`;
+    whatsappBtn.href = `https://wa.me/${IVOIRE_KICKS_STORE.whatsappPhone}?text=${whatsappMessage}`;
   }
 
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+}
+
+function initiateSasPayPayment(orderRef, amount) {
+  showToast('💳 Connexion à la passerelle de paiement SasPay...', 'info');
+  const targetUrl = `${SASPAY_CONFIG.checkoutUrl}?ref=${encodeURIComponent(orderRef)}&amount=${amount}&currency=XOF&merchant=${encodeURIComponent(SASPAY_CONFIG.merchantName)}&email=${encodeURIComponent(IVOIRE_KICKS_STORE.email)}&phone=${encodeURIComponent(IVOIRE_KICKS_STORE.whatsappPhone)}`;
+  
+  // Tente d'ouvrir la passerelle SasPay ou redirige vers Wave direct
+  const popup = window.open(targetUrl, '_blank');
+  if (!popup) {
+    window.location.href = IVOIRE_KICKS_STORE.waveDirectUrl;
+  }
 }
 
 function closeSuccessModal() {
@@ -687,7 +736,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const userBtn = document.querySelector('#user-btn');
   if (userBtn) {
     userBtn.addEventListener('click', () => {
-      const localOrders = JSON.parse(localStorage.getItem('kickora_orders') || '[]');
+      const localOrders = JSON.parse(localStorage.getItem('ivoire_kicks_orders') || localStorage.getItem('kickora_orders') || '[]');
       if (localOrders.length === 0) {
         showToast('📦 Aucune commande enregistrée pour le moment.', 'info');
       } else {
@@ -697,5 +746,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  console.log('🇨🇮 KICKORA prêt : E-commerce de Sneakers en Côte d\'Ivoire');
+  console.log('🇨🇮 IVOIRE KICKS prêt : E-commerce de Sneakers en Côte d\'Ivoire');
 });

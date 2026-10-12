@@ -1,7 +1,7 @@
 <?php
 /**
  * =========================================================================
- * KICKORA - API Backend PHP & MySQL (Côte d'Ivoire)
+ * IVOIRE KICKS - API Backend PHP & MySQL (Côte d'Ivoire)
  * Configuration & Sécurité PDO
  * =========================================================================
  */
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // Paramètres de connexion MySQL
 $DB_HOST = getenv('DB_HOST') ?: 'localhost';
-$DB_NAME = getenv('DB_NAME') ?: 'kickora_db';
+$DB_NAME = getenv('DB_NAME') ?: 'ivoire_kicks_db';
 $DB_USER = getenv('DB_USER') ?: 'root';
 $DB_PASS = getenv('DB_PASS') ?: '';
 

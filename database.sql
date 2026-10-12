@@ -1,12 +1,12 @@
 -- =========================================================================
--- KICKORA - Schéma Base de Données MySQL / MariaDB (PHP Backend)
+-- IVOIRE KICKS - Schéma Base de Données MySQL / MariaDB (PHP Backend)
 -- Thème : E-commerce de Sneakers en Côte d'Ivoire (Abidjan)
 -- =========================================================================
 -- Compatible avec WampServer, XAMPP, cPanel, phpMyAdmin et serveurs Linux.
 -- =========================================================================
 
-CREATE DATABASE IF NOT EXISTS `kickora_db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `kickora_db`;
+CREATE DATABASE IF NOT EXISTS `ivoire_kicks_db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `ivoire_kicks_db`;
 
 -- 1. TABLE DES PRODUITS
 CREATE TABLE IF NOT EXISTS `products` (
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `order_items` (
     CONSTRAINT `fk_order_items_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 4. DONNÉES DE BASE (Produits KICKORA Côte d'Ivoire)
+-- 4. DONNÉES DE BASE (Produits IVOIRE KICKS Côte d'Ivoire)
 INSERT INTO `products` (`name`, `brand`, `price_fcfa`, `old_price_fcfa`, `image_url`, `is_featured`, `rating`) VALUES
 ('Nike Dunk Low Retro Panda', 'Nike', 32000, 40000, 'images/shoe-panda-dunk.png', 1, 5.0),
 ('Nike Shox TL Triple Black', 'Nike', 45000, 55000, 'images/shoe-shox-black.png', 1, 5.0),

@@ -1472,7 +1472,7 @@ header .icons a .badge {
 }
 
 /* =========================================================================
-   SECTION NEWSLETTER (VIP CLUB KICKORA)
+   SECTION NEWSLETTER (VIP CLUB IVOIRE KICKS)
    ========================================================================= */
 .newsletter {
   padding-top: 2rem;
@@ -1979,6 +1979,7 @@ header .icons a .badge {
 .payment-option.wave .opt-icon { background: #1DA1F2; }
 .payment-option.om .opt-icon { background: #FF6600; }
 .payment-option.mtn .opt-icon { background: #FFCC00; color: #000; }
+.payment-option.saspay .opt-icon { background: linear-gradient(135deg, #0b7bc4, #ff6600); color: #fff; }
 .payment-option.cash .opt-icon { background: var(--green-ci); }
 
 .payment-option .opt-text {

@@ -1,5 +1,5 @@
 -- =========================================================================
--- KICKORA - Schéma Base de Données Supabase (PostgreSQL)
+-- IVOIRE KICKS - Schéma Base de Données Supabase (PostgreSQL)
 -- Thème : E-commerce de Sneakers en Côte d'Ivoire (Abidjan)
 -- =========================================================================
 -- Instructions : 
@@ -11,7 +11,7 @@
 -- Activer l'extension UUID pour générer des identifiants uniques
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
--- 1. TABLE DES PRODUITS (Catalogue KICKORA)
+-- 1. TABLE DES PRODUITS (Catalogue IVOIRE KICKS)
 CREATE TABLE IF NOT EXISTS public.products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS public.products (
 -- 2. TABLE DES COMMANDES (Clients & Livraisons CI)
 CREATE TABLE IF NOT EXISTS public.orders (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    order_ref VARCHAR(50) UNIQUE NOT NULL,      -- Exemple: KCK-CI-84729
+    order_ref VARCHAR(50) UNIQUE NOT NULL,      -- Exemple: IVK-CI-84729
     customer_name VARCHAR(255) NOT NULL,
     customer_phone VARCHAR(50) NOT NULL,       -- Format ivoirien: +225 07...
     customer_city VARCHAR(100) NOT NULL,        -- Abidjan, Bouaké, Yamoussoukro, etc.
@@ -104,7 +104,7 @@ ON public.reviews FOR SELECT
 USING (true);
 
 -- =========================================================================
--- DONNÉES INITIALES (Produits réels KICKORA & Prix en FCFA)
+-- DONNÉES INITIALES (Produits réels IVOIRE KICKS & Prix en FCFA)
 -- =========================================================================
 
 INSERT INTO public.products (name, brand, price_fcfa, old_price_fcfa, image_url, is_featured, rating) VALUES
@@ -122,5 +122,5 @@ ON CONFLICT DO NOTHING;
 INSERT INTO public.reviews (customer_name, location, comment, rating) VALUES
 ('Kouassi Jean-Marc', 'Cocody Angré 8ème Tranche', 'Livraison super rapide en moins de 3 heures ! Paire de Shox originale, exactement conforme à la photo. Paiement direct par Wave au livreur.', 5),
 ('Aïcha Koné', 'Marcory Zone 4', 'J ai pris la Air Max 270 en pointure 38. La taille est parfaite, le livreur m a attendu pour que j essaye. Service client WhatsApp très réactif.', 5),
-('Cédric Bahi', 'Yopougon Maroc', 'Franchement le style est au rendez-vous. La Jordan Royal Blue est lourde ! Merci KICKORA pour le sérieux.', 5)
+('Cédric Bahi', 'Yopougon Maroc', 'Franchement le style est au rendez-vous. La Jordan Royal Blue est lourde ! Merci IVOIRE KICKS pour le sérieux.', 5)
 ON CONFLICT DO NOTHING;
