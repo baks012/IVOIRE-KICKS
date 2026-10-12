@@ -1,0 +1,7 @@
+# robots.txt pour KICKORA - Boutique de Sneakers en Côte d'Ivoire
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemap officiel pour Google Search Console
+Sitemap: https://kickora.vercel.app/sitemap.xml

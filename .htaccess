@@ -1,0 +1,33 @@
+# =========================================================================
+# KICKORA - Sécurisation Serveur Apache (.htaccess)
+# =========================================================================
+
+# Encodage UTF-8 par défaut
+AddDefaultCharset UTF-8
+
+# Protection contre le Listage des Répertoires
+Options -Indexes
+
+# Protection contre les failles d'injection et XSS
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "DENY"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Compression GZIP pour accélérer le chargement du site
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Mise en cache des images pour optimiser la vitesse
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>

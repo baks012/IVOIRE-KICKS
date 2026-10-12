@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KICKORA | N°1 des Sneakers & Baskets en Côte d'Ivoire - Abidjan</title>
+
+    <!-- SEO Meta Tags pour Indexation Google & Réseaux Sociaux -->
+    <meta name="description" content="KICKORA : Boutique de sneakers et baskets authentiques à Abidjan, Côte d'Ivoire. Nike, Jordan, Dunk, Shox, Air Max. Livraison express 24h et paiement sécurisé par Wave, Orange Money et MTN.">
+    <meta name="keywords" content="sneakers abidjan, baskets cote d ivoire, kickora, nike abidjan, jordan abidjan, dunk panda cocody, shox abidjan, wave mobile money baskets, orange money sneakers abidjan, livraison baskets yopougon">
+    <meta name="author" content="Bakayoko Sory (https://portfolio-gules-six-86.vercel.app/)">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://kickora.vercel.app/">
+
+    <!-- Open Graph / Facebook / WhatsApp Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_CI">
+    <meta property="og:url" content="https://kickora.vercel.app/">
+    <meta property="og:title" content="KICKORA | Le Temple de la Sneaker en Côte d'Ivoire">
+    <meta property="og:description" content="Commandez vos paires de baskets préférées en FCFA. Livraison rapide à Abidjan et partout en CI. Paiement facile par Wave, Orange Money et MTN.">
+    <meta property="og:image" content="images/shoe-shox-black.png">
+
+    <!-- Twitter Meta -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KICKORA | Sneakers & Baskets Abidjan">
+    <meta name="twitter:description" content="Le meilleur de la sneaker à Abidjan. Nike, Jordan, Dunk. Payez avec Wave ou Orange Money.">
+    <meta name="twitter:image" content="images/shoe-shox-black.png">
+
+    <!-- Données Structurées Google Schema.org (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ShoeStore",
+      "name": "KICKORA",
+      "image": "https://kickora.vercel.app/images/shoe-shox-black.png",
+      "description": "Boutique en ligne spécialisée dans les baskets et sneakers en Côte d'Ivoire.",
+      "url": "https://kickora.vercel.app/",
+      "telephone": "+2250700000000",
+      "priceRange": "25000 - 65000 XOF",
+      "currenciesAccepted": "XOF",
+      "paymentAccepted": "Wave, Orange Money, MTN Mobile Money, Cash",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Boulevard Latrille, Angré",
+        "addressLocality": "Abidjan",
+        "addressRegion": "Abidjan",
+        "addressCountry": "CI"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 5.359952,
+        "longitude": -4.008256
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "08:00",
+        "closes": "22:00"
+      }
+    }
+    </script>
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Feuille de styles personnalisée KICKORA -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Client Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+    <!-- Bandeau Annonce Supérieur (Identité Ivoirienne) -->
+    <div class="top-notice">
+        <div>
+            <span class="ci-flag">🇨🇮</span> 
+            <strong>KICKORA ABIDJAN :</strong> Livraison Express 24h dans toutes les communes & Expédition Intérieur
+        </div>
+        <div>
+            Paiements acceptés : <strong>Wave • Orange Money • MTN • Cash</strong>
+        </div>
+    </div>
+
+    <!-- Header Section Starts -->
+    <header>
+        <div id="menu-bar" class="fas fa-bars"></div>
+
+        <a href="#" class="logo">
+            <span class="brand-kick">KICK</span><span class="brand-ora">ORA</span>
+            <span class="badge-tag">CI 🇨🇮</span>
+        </a>
+
+        <nav class="navbar">
+            <a href="#home">Accueil</a>
+            <a href="#products">Nouveautés</a>
+            <a href="#featured">Vedettes</a>
+            <a href="#delivery">Livraison CI</a>
+            <a href="#review">Avis Clients</a>
+        </nav>
+
+        <div class="icons">
+            <a href="#products" class="fas fa-search" title="Rechercher une paire"></a>
+            <a href="javascript:void(0)" id="wishlist-btn" class="fas fa-heart" title="Mes Favoris">
+                <span class="badge" id="wishlist-count">0</span>
+            </a>
+            <a href="javascript:void(0)" id="cart-btn" class="fas fa-shopping-cart" title="Mon Panier">
+                <span class="badge" id="cart-count">0</span>
+            </a>
+            <a href="javascript:void(0)" id="user-btn" class="fas fa-user" title="Mes Commandes"></a>
+        </div>
+    </header>
+    <!-- Header Section Ends -->
+
+    <!-- Home Slider Section Starts (Modèle Source Conservé avec Bannières Réelles) -->
+    <section class="home" id="home">
+
+        <!-- Slide 1 : Nike Shox TL Triple Black -->
+        <div class="slide-container active">
+            <div class="slide">
+                <div class="content">
+                    <span class="tag-ci"><i class="fas fa-fire"></i> Best-seller Abidjan</span>
+                    <h3>Nike Shox TL Triple Black</h3>
+                    <p>L'icône du streetwear abidjanais. Système d'amorti mécanique à 12 colonnes pour un confort absolu et un style affirmé lors de vos sorties à Cocody et Zone 4.</p>
+                    <div class="price-hero">
+                        <span class="current">45 000 FCFA</span>
+                        <span class="old">55 000 FCFA</span>
+                        <span class="badge-promo">-18% PROMO</span>
+                    </div>
+                    <div class="cta-group">
+                        <button class="btn" onclick="addToCart(PRODUCTS_DATA[1], '43')">
+                            <i class="fas fa-shopping-bag"></i> Ajouter au panier
+                        </button>
+                        <a href="https://wa.me/2250700000000?text=Bonjour%20KICKORA,%20je%20souhaite%20commander%20la%20Nike%20Shox%20TL%20Triple%20Black%20à%2045%20000%20FCFA" target="_blank" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <div class="image">
+                    <img src="images/shoe-shox-black.png" class="shoe" alt="Nike Shox TL Triple Black Abidjan">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 : Nike Air Max 270 Pure Platinum -->
+        <div class="slide-container">
+            <div class="slide">
+                <div class="content">
+                    <span class="tag-ci"><i class="fas fa-star"></i> Confort Aérien 24H</span>
+                    <h3>Nike Air Max 270 Ice White</h3>
+                    <p>La plus haute bulle d'air signée Nike pour une démarche souple et un look monochrome éclatant. Parfaite pour le climat d'Abidjan, respirante et légère.</p>
+                    <div class="price-hero">
+                        <span class="current">38 000 FCFA</span>
+                        <span class="old">48 000 FCFA</span>
+                        <span class="badge-promo">-21% PROMO</span>
+                    </div>
+                    <div class="cta-group">
+                        <button class="btn" onclick="addToCart(PRODUCTS_DATA[3], '41')">
+                            <i class="fas fa-shopping-bag"></i> Ajouter au panier
+                        </button>
+                        <a href="https://wa.me/2250700000000?text=Bonjour%20KICKORA,%20je%20souhaite%20commander%20la%20Nike%20Air%20Max%20270%20à%2038%20000%20FCFA" target="_blank" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <div class="image">
+                    <img src="images/shoe-airmax270-studio.png" class="shoe" alt="Nike Air Max 270 Pure White Abidjan">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 : Futuristic Cyber Neon Runner -->
+        <div class="slide-container">
+            <div class="slide">
+                <div class="content">
+                    <span class="tag-ci"><i class="fas fa-bolt"></i> Nouveauté Futuriste 2026</span>
+                    <h3>Cyber Neon Runner Edition</h3>
+                    <p>Design aéro-dynamique aux touches vert néon saisissantes. Une allure high-tech avant-gardiste pour ceux qui aiment avoir une longueur d'avance dans leur style.</p>
+                    <div class="price-hero">
+                        <span class="current">42 000 FCFA</span>
+                        <span class="old">50 000 FCFA</span>
+                        <span class="badge-promo">-16% PROMO</span>
+                    </div>
+                    <div class="cta-group">
+                        <button class="btn" onclick="addToCart(PRODUCTS_DATA[5], '44')">
+                            <i class="fas fa-shopping-bag"></i> Ajouter au panier
+                        </button>
+                        <a href="https://wa.me/2250700000000?text=Bonjour%20KICKORA,%20je%20souhaite%20commander%20la%20Cyber%20Neon%20Runner%20à%2042%20000%20FCFA" target="_blank" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <div class="image">
+                    <img src="images/shoe-neon-futuristic.png" class="shoe" alt="Sneakers Futuristes Gris et Vert Néon">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 : High Performance Bball Edition -->
+        <div class="slide-container">
+            <div class="slide">
+                <div class="content">
+                    <span class="tag-ci"><i class="fas fa-crown"></i> Haute Performance</span>
+                    <h3>High Court Bball Edition</h3>
+                    <p>Mélange puissant de blanc franc, rouge cardinal et noir carbone. Maintien de cheville renforcé et semelle adhérente haute durabilité pour le bitume.</p>
+                    <div class="price-hero">
+                        <span class="current">52 000 FCFA</span>
+                        <span class="old">65 000 FCFA</span>
+                        <span class="badge-promo">-20% PROMO</span>
+                    </div>
+                    <div class="cta-group">
+                        <button class="btn" onclick="addToCart({id:9, name:'High Court Bball Edition', price:52000, image:'images/shoe-high-redblack.png', defaultSize:'44'}, '44')">
+                            <i class="fas fa-shopping-bag"></i> Ajouter au panier
+                        </button>
+                        <a href="https://wa.me/2250700000000?text=Bonjour%20KICKORA,%20je%20souhaite%20commander%20la%20High%20Court%20Bball%20à%2052%20000%20FCFA" target="_blank" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <div class="image">
+                    <img src="images/shoe-high-redblack.png" class="shoe" alt="Baskets Haute Performance Bball Rouge et Noir">
+                </div>
+            </div>
+        </div>
+
+        <div id="prev" class="fas fa-chevron-left" onclick="prev()"></div>
+        <div id="next" class="fas fa-chevron-right" onclick="next()"></div>
+
+    </section>
+    <!-- Home Slider Section Ends -->
+
+    <!-- Services Section Starts (100% Adapté à la Côte d'Ivoire) -->
+    <section class="service">
+        <div class="box-container">
+            <div class="box">
+                <div class="icon-wrap"><i class="fas fa-shipping-fast"></i></div>
+                <h3>Livraison Rapide CI</h3>
+                <p>Livré sous 24h à Abidjan (Cocody, Yopougon, Marcory, Plateau...) et expédition express à l'intérieur du pays.</p>
+            </div>
+
+            <div class="box">
+                <div class="icon-wrap"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Paiement Mobile Money</h3>
+                <p>Payez en toute simplicité par Wave Côte d'Ivoire, Orange Money, MTN MoMo ou Cash lors de la réception.</p>
+            </div>
+
+            <div class="box">
+                <div class="icon-wrap"><i class="fas fa-sync-alt"></i></div>
+                <h3>Essayage & Échange Garanti</h3>
+                <p>Essayez votre paire à la livraison. Si la pointure ne convient pas, échange gratuit sous 48 heures.</p>
+            </div>
+
+            <div class="box">
+                <div class="icon-wrap"><i class="fab fa-whatsapp"></i></div>
+                <h3>Conseiller WhatsApp 24/7</h3>
+                <p>Une question sur une taille ? Notre équipe basée à Abidjan vous répond et valide votre commande en direct.</p>
+            </div>
+        </div>
+    </section>
+    <!-- Services Section Ends -->
+
+    <!-- Products Section Starts (Prix Réels en FCFA & Sélection de Pointures) -->
+    <section class="products" id="products">
+        <h1 class="heading">Dernières <span>Nouveautés</span>
+            <p class="subheading">Les paires de sneakers les plus prisées en Côte d'Ivoire au meilleur prix garanti en FCFA</p>
+        </h1>
+
+        <div class="box-container">
+
+            <!-- Produit 1 : Dunk Panda -->
+            <div class="box" id="product-card-1">
+                <span class="badge-exclusive">Top Vente Cocody</span>
+                <div class="icons">
+                    <a href="javascript:void(0)" onclick="toggleWishlist(1)" class="fas fa-heart" title="Ajouter aux favoris"></a>
+                    <a href="https://wa.me/2250700000000?text=Je%20veux%20commander%20la%20Nike%20Dunk%20Low%20Panda%20à%2032000%20FCFA" target="_blank" class="fas fa-share" title="Partager sur WhatsApp"></a>
+                    <a href="javascript:void(0)" onclick="addToCart(PRODUCTS_DATA[0], '42')" class="fas fa-eye" title="Ajouter rapide"></a>
+                </div>
+                <div class="img-container">
+                    <img src="images/shoe-panda-dunk.png" alt="Nike Dunk Low Retro Panda">
+                </div>
+                <div class="content">
+                    <span class="brand-name">Nike Sportswear</span>
+                    <h3>Nike Dunk Low Retro Panda</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span>(128 avis)</span>
+                    </div>
+                    <div class="size-selector">
+                        <span>40</span>
+                        <span>41</span>
+                        <span class="selected">42</span>
+                        <span>43</span>
+                        <span>44</span>
+                    </div>
+                    <div class="price">32 000 FCFA <span>40 000 FCFA</span></div>
+                    <button class="btn" onclick="const size = document.querySelector('#product-card-1 .size-selector .selected').textContent; addToCart(PRODUCTS_DATA[0], size);">
+                        <i class="fas fa-shopping-cart"></i> Ajouter au panier
+                    </button>
+                </div>
+            </div>
+
+            <!-- Produit 2 : Nike Shox TL Triple Black -->
+            <div class="box" id="product-card-2">
+                <span class="badge-exclusive">Icon Streetwear</span>
+                <div class="icons">
+                    <a href="javascript:void(0)" onclick="toggleWishlist(2)" class="fas fa-heart"></a>
+                    <a href="https://wa.me/2250700000000?text=Je%20veux%20commander%20la%20Nike%20Shox%20TL%20à%2045000%20FCFA" target="_blank" class="fas fa-share"></a>
+                    <a href="javascript:void(0)" onclick="addToCart(PRODUCTS_DATA[1], '43')" class="fas fa-eye"></a>
+                </div>
+                <div class="img-container">
+                    <img src="images/shoe-shox-black.png" alt="Nike Shox TL Triple Black">
+                </div>
+                <div class="content">
+                    <span class="brand-name">Nike Shox Series</span>
+                    <h3>Nike Shox TL Triple Black</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span>(94 avis)</span>
+                    </div>
+                    <div class="size-selector">
+                        <span>41</span>
+                        <span>42</span>
+                        <span class="selected">43</span>
+                        <span>44</span>
+                        <span>45</span>
+                    </div>
+                    <div class="price">45 000 FCFA <span>55 000 FCFA</span></div>
+                    <button class="btn" onclick="const size = document.querySelector('#product-card-2 .size-selector .selected').textContent; addToCart(PRODUCTS_DATA[1], size);">
+                        <i class="fas fa-shopping-cart"></i> Ajouter au panier
+                    </button>
+                </div>
+            </div>
+
+            <!-- Produit 3 : Air Jordan 1 High Royal Blue -->
+            <div class="box" id="product-card-3">
+                <span class="badge-exclusive">Édition Limitée</span>
+                <div class="icons">
+                    <a href="javascript:void(0)" onclick="toggleWishlist(3)" class="fas fa-heart"></a>
+                    <a href="https://wa.me/2250700000000?text=Je%20veux%20commander%20la%20Jordan%201%20High%20Royal%20à%2048000%20FCFA" target="_blank" class="fas fa-share"></a>
+                    <a href="javascript:void(0)" onclick="addToCart(PRODUCTS_DATA[2], '42')" class="fas fa-eye"></a>
+                </div>
+                <div class="img-container">
+                    <img src="images/shoe-high-blackblue.png" alt="Air Jordan 1 High Royal Blue">
+                </div>
+                <div class="content">
+                    <span class="brand-name">Jordan Retro</span>
+                    <h3>Air Jordan 1 High Royal Blue</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span>(87 avis)</span>
+                    </div>
+                    <div class="size-selector">
+                        <span>40</span>
+                        <span>41</span>
+                        <span class="selected">42</span>
+                        <span>43</span>
+                        <span>44</span>
+                    </div>
+                    <div class="price">48 000 FCFA <span>60 000 FCFA</span></div>
+                    <button class="btn" onclick="const size = document.querySelector('#product-card-3 .size-selector .selected').textContent; addToCart(PRODUCTS_DATA[2], size);">
+                        <i class="fas fa-shopping-cart"></i> Ajouter au panier
+                    </button>
+                </div>
+            </div>
+
+            <!-- Produit 4 : Air Max 270 Pure Platinum -->
+            <div class="box" id="product-card-4">
+                <span class="badge-exclusive">Confort Bulle d'Air</span>
+                <div class="icons">
+                    <a href="javascript:void(0)" onclick="toggleWishlist(4)" class="fas fa-heart"></a>
+                    <a href="https://wa.me/2250700000000?text=Je%20veux%20commander%20la%20Air%20Max%20270%20à%2038000%20FCFA" target="_blank" class="fas fa-share"></a>
+                    <a href="javascript:void(0)" onclick="addToCart(PRODUCTS_DATA[3], '41')" class="fas fa-eye"></a>
+                </div>
+                <div class="img-container">
+                    <img src="images/shoe-airmax270-bubble.png" alt="Nike Air Max 270 Pure Platinum">
+                </div>
+                <div class="content">
+                    <span class="brand-name">Nike Air Max</span>
+                    <h3>Nike Air Max 270 Pure Platinum</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span>(112 avis)</span>
+                    </div>
+                    <div class="size-selector">
+                        <span>39</span>
+                        <span>40</span>
+                        <span class="selected">41</span>
+                        <span>42</span>
+                        <span>43</span>
+                    </div>
+                    <div class="price">38 000 FCFA <span>48 000 FCFA</span></div>
+                    <button class="btn" onclick="const size = document.querySelector('#product-card-4 .size-selector .selected').textContent; addToCart(PRODUCTS_DATA[3], size);">
+                        <i class="fas fa-shopping-cart"></i> Ajouter au panier
+                    </button>
+                </div>
+            </div>
+
+            <!-- Produit 5 : Air Force 1 Chrome Swoosh -->
+            <div class="box" id="product-card-5">
+                <span class="badge-exclusive">Chrome Style</span>
+                <div class="icons">
+                    <a href="javascript:void(0)" onclick="toggleWishlist(5)" class="fas fa-heart"></a>
+                    <a href="https://wa.me/2250700000000?text=Je%20veux%20commander%20la%20Air%20Force%201%20Chrome%20à%2035000%20FCFA" target="_blank" class="fas fa-share"></a>
+                    <a href="javascript:void(0)" onclick="addToCart(PRODUCTS_DATA[4], '42')" class="fas fa-eye"></a>
+                </div>
+                <div class="img-container">
+                    <img src="images/shoe-swoosh-chrome.png" alt="Nike Air Force 1 Chrome Swoosh">
+                </div>
+                <div class="content">
+                    <span class="brand-name">Nike AF-1</span>
+                    <h3>Air Force 1 Chrome Swoosh</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span>(65 avis)</span>
+                    </div>
+                    <div class="size-selector">
+                        <span>41</span>
+                        <span class="selected">42</span>
+                        <span>43</span>
+                        <span>44</span>
+                        <span>45</span>
+                    </div>
+                    <div class="price">35 000 FCFA <span>45 000 FCFA</span></div>
+                    <button class="btn" onclick="const size = document.querySelector('#product-card-5 .size-selector .selected').textContent; addToCart(PRODUCTS_DATA[4], size);">
+                        <i class="fas fa-shopping-cart"></i> Ajouter au panier
+                    </button>
+                </div>
+            </div>
+
+            <!-- Produit 6 : VaporMax Teal Glow -->
+            <div class="box" id="product-card-6">
+                <span class="badge-exclusive">Glow In The Dark</span>
+                <div class="icons">
+                    <a href="javascript:void(0)" onclick="toggleWishlist(6)" class="fas fa-heart"></a>
+                    <a href="https://wa.me/2250700000000?text=Je%20veux%20commander%20la%20VaporMax%20Teal%20Glow%20à%2042000%20FCFA" target="_blank" class="fas fa-share"></a>
+                    <a href="javascript:void(0)" onclick="addToCart(PRODUCTS_DATA[5], '44')" class="fas fa-eye"></a>
+                </div>
+                <div class="img-container">
+                    <img src="images/shoe-teal-futuristic.png" alt="VaporMax Neon Teal Glow">
+                </div>
+                <div class="content">
+                    <span class="brand-name">Nike Running</span>
+                    <h3>VaporMax Neon Teal Glow</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                        <span>(53 avis)</span>
+                    </div>
+                    <div class="size-selector">
+                        <span>41</span>
+                        <span>42</span>
+                        <span>43</span>
+                        <span class="selected">44</span>
+                        <span>45</span>
+                    </div>
+                    <div class="price">42 000 FCFA <span>52 000 FCFA</span></div>
+                    <button class="btn" onclick="const size = document.querySelector('#product-card-6 .size-selector .selected').textContent; addToCart(PRODUCTS_DATA[5], size);">
+                        <i class="fas fa-shopping-cart"></i> Ajouter au panier
+                    </button>
+                </div>
+            </div>
+
+            <!-- Produit 7 : Urban Chic Pink Swirl -->
+            <div class="box" id="product-card-7">
+                <span class="badge-exclusive">Féminin & Tendance</span>
+                <div class="icons">
+                    <a href="javascript:void(0)" onclick="toggleWishlist(7)" class="fas fa-heart"></a>
+                    <a href="https://wa.me/2250700000000?text=Je%20veux%20commander%20la%20Pink%20Swirl%20à%2034000%20FCFA" target="_blank" class="fas fa-share"></a>
+                    <a href="javascript:void(0)" onclick="addToCart(PRODUCTS_DATA[6], '39')" class="fas fa-eye"></a>
+                </div>
+                <div class="img-container">
+                    <img src="images/shoe-pink-swirl.png" alt="Urban Chic Swirl Pink Edition">
+                </div>
+                <div class="content">
+                    <span class="brand-name">Custom Fashion</span>
+                    <h3>Urban Chic Swirl Pink Edition</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span>(72 avis)</span>
+                    </div>
+                    <div class="size-selector">
+                        <span>37</span>
+                        <span>38</span>
+                        <span class="selected">39</span>
+                        <span>40</span>
+                        <span>41</span>
+                    </div>
+                    <div class="price">34 000 FCFA <span>42 000 FCFA</span></div>
+                    <button class="btn" onclick="const size = document.querySelector('#product-card-7 .size-selector .selected').textContent; addToCart(PRODUCTS_DATA[6], size);">
+                        <i class="fas fa-shopping-cart"></i> Ajouter au panier
+                    </button>
+                </div>
+            </div>
+
+            <!-- Produit 8 : Jordan Retro High Royal OG -->
+            <div class="box" id="product-card-8">
+                <span class="badge-exclusive">OG Legend</span>
+                <div class="icons">
+                    <a href="javascript:void(0)" onclick="toggleWishlist(8)" class="fas fa-heart"></a>
+                    <a href="https://wa.me/2250700000000?text=Je%20veux%20commander%20la%20Jordan%20OG%20Royal%20à%2049000%20FCFA" target="_blank" class="fas fa-share"></a>
+                    <a href="javascript:void(0)" onclick="addToCart(PRODUCTS_DATA[7], '43')" class="fas fa-eye"></a>
+                </div>
+                <div class="img-container">
+                    <img src="images/shoe-high-royal.png" alt="Jordan Retro High OG Royal">
+                </div>
+                <div class="content">
+                    <span class="brand-name">Jordan Brand</span>
+                    <h3>Jordan Retro High OG Royal</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span>(99 avis)</span>
+                    </div>
+                    <div class="size-selector">
+                        <span>41</span>
+                        <span>42</span>
+                        <span class="selected">43</span>
+                        <span>44</span>
+                        <span>45</span>
+                    </div>
+                    <div class="price">49 000 FCFA <span>62 000 FCFA</span></div>
+                    <button class="btn" onclick="const size = document.querySelector('#product-card-8 .size-selector .selected').textContent; addToCart(PRODUCTS_DATA[7], size);">
+                        <i class="fas fa-shopping-cart"></i> Ajouter au panier
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- Products Section Ends -->
+
+    <!-- Featured Section Starts (Modèle Source Conservé avec Miniatures Interactives) -->
+    <section class="featured" id="featured">
+        <h1 class="heading">Modèles <span>Vedettes</span>
+            <p class="subheading">Cliquez sur les miniatures pour inspecter la paire sous tous ses angles</p>
+        </h1>
+
+        <!-- Row 1 : Galerie Air Max 270 Pure White -->
+        <div class="row">
+            <div class="image-container">
+                <div class="small-image">
+                    <img src="images/shoe-airmax270-studio.png" class="featured-image-1 active" alt="Vue studio">
+                    <img src="images/shoe-airmax270-closeup.png" class="featured-image-1" alt="Gros plan">
+                    <img src="images/shoe-airmax270-back.png" class="featured-image-1" alt="Vue arrière talon">
+                    <img src="images/shoe-airmax270-profile.png" class="featured-image-1" alt="Profil opposé">
+                </div>
+                <div class="big-image">
+                    <img src="images/shoe-airmax270-studio.png" class="big-image-1" alt="Nike Air Max 270 Pure White">
+                </div>
+            </div>
+            <div class="content">
+                <div class="category-tag">Sneakerhead Pack 2026</div>
+                <h3>Nike Air Max 270 Pure White</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <span style="color:var(--text-secondary); font-size:1.3rem;"> (140 avis clients)</span>
+                </div>
+                <p>Découvrez la sensation de marcher sur un nuage grâce à la bulle d'air Air Max 270 de 32 mm. Tissage respirant en mesh haute résistance, finitions premium sans coutures apparentes.</p>
+                <div class="feature-specs">
+                    <span class="spec-badge"><i class="fas fa-feather"></i> Ultra-légère</span>
+                    <span class="spec-badge"><i class="fas fa-shield-alt"></i> 100% Original</span>
+                    <span class="spec-badge"><i class="fas fa-truck"></i> Stock Abidjan</span>
+                </div>
+                <div class="price">38 000 FCFA <span>48 000 FCFA</span></div>
+                <div class="actions">
+                    <button class="btn" onclick="addToCart(PRODUCTS_DATA[3], '42')">
+                        <i class="fas fa-shopping-bag"></i> Acheter cette paire
+                    </button>
+                    <a href="https://wa.me/2250700000000?text=Je%20veux%20commander%20la%20Nike%20Air%20Max%20270%20Pure%20White%20à%2038000%20FCFA" target="_blank" class="btn btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i> Commander WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2 : Galerie Triple Black Streetwear & Shox -->
+        <div class="row">
+            <div class="image-container">
+                <div class="small-image">
+                    <img src="images/shoe-shox-black.png" class="featured-image-2 active" alt="Shox Black">
+                    <img src="images/shoe-swoosh-chrome.png" class="featured-image-2" alt="Chrome Swoosh">
+                    <img src="images/shoe-teal-futuristic.png" class="featured-image-2" alt="Teal accents">
+                    <img src="images/shoe-nike-bw.png" class="featured-image-2" alt="Noir et blanc studio">
+                </div>
+                <div class="big-image">
+                    <img src="images/shoe-shox-black.png" class="big-image-2" alt="Collection Triple Black Shox">
+                </div>
+            </div>
+            <div class="content">
+                <div class="category-tag">Black Streetwear Legend</div>
+                <h3>Nike Shox TL & Dark Series</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <span style="color:var(--text-secondary); font-size:1.3rem;"> (118 avis clients)</span>
+                </div>
+                <p>Le modèle mythique adopté par toute la jeunesse urbaine d'Abidjan. Structure cage en TPU brillante, mesh noir furtif et amorti réactif sur l'ensemble du pied.</p>
+                <div class="feature-specs">
+                    <span class="spec-badge"><i class="fas fa-tint"></i> Respirant</span>
+                    <span class="spec-badge"><i class="fas fa-gem"></i> Finition Luxe</span>
+                    <span class="spec-badge"><i class="fas fa-check-circle"></i> Pointures 40-45</span>
+                </div>
+                <div class="price">45 000 FCFA <span>55 000 FCFA</span></div>
+                <div class="actions">
+                    <button class="btn" onclick="addToCart(PRODUCTS_DATA[1], '43')">
+                        <i class="fas fa-shopping-bag"></i> Acheter cette paire
+                    </button>
+                    <a href="https://wa.me/2250700000000?text=Je%20veux%20commander%20la%20Nike%20Shox%20TL%20Black%20à%2045000%20FCFA" target="_blank" class="btn btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i> Commander WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 3 : Galerie Air Jordan High & Retro Legends -->
+        <div class="row">
+            <div class="image-container">
+                <div class="small-image">
+                    <img src="images/shoe-high-blackblue.png" class="featured-image-3 active" alt="Jordan High Blue">
+                    <img src="images/shoe-high-royal.png" class="featured-image-3" alt="Jordan Royal OG">
+                    <img src="images/shoe-panda-dunk.png" class="featured-image-3" alt="Dunk Panda">
+                    <img src="images/shoe-high-redblack.png" class="featured-image-3" alt="Bball Red Black">
+                </div>
+                <div class="big-image">
+                    <img src="images/shoe-high-blackblue.png" class="big-image-3" alt="Air Jordan Retro Collection">
+                </div>
+            </div>
+            <div class="content">
+                <div class="category-tag">Retro Basketball Heritage</div>
+                <h3>Air Jordan 1 High Royal Pack</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <span style="color:var(--text-secondary); font-size:1.3rem;"> (162 avis clients)</span>
+                </div>
+                <p>La silhouette légendaire de 1985 réinventée avec des matériaux nobles en cuir pleine fleur. Col montant matelassé, logo Wings embossé et semelle en caoutchouc résistant.</p>
+                <div class="feature-specs">
+                    <span class="spec-badge"><i class="fas fa-history"></i> Héritage 1985</span>
+                    <span class="spec-badge"><i class="fas fa-award"></i> Cuir Premium</span>
+                    <span class="spec-badge"><i class="fas fa-box"></i> Boîte d'origine</span>
+                </div>
+                <div class="price">48 000 FCFA <span>60 000 FCFA</span></div>
+                <div class="actions">
+                    <button class="btn" onclick="addToCart(PRODUCTS_DATA[2], '42')">
+                        <i class="fas fa-shopping-bag"></i> Acheter cette paire
+                    </button>
+                    <a href="https://wa.me/2250700000000?text=Je%20veux%20commander%20la%20Jordan%201%20High%20Royal%20à%2048000%20FCFA" target="_blank" class="btn btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i> Commander WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- Featured Section Ends -->
+
+    <!-- Section Livraison & Paiement en Côte d'Ivoire Starts -->
+    <section class="delivery-section" id="delivery">
+        <h1 class="heading">Service de <span>Livraison & Paiement</span>
+            <p class="subheading">Nous livrons chez vous à Abidjan et expédions dans toutes les villes de Côte d'Ivoire</p>
+        </h1>
+
+        <div class="delivery-grid">
+            <div class="delivery-card">
+                <h3><i class="fas fa-motorcycle"></i> Abidjan Express (24H)</h3>
+                <p>Livraison à domicile ou au bureau par nos coursiers moto. Vous essayez votre paire de baskets avant de régler.</p>
+                <div class="city-chips">
+                    <span>Cocody (Angré, Riviera, 2 Plateaux)</span>
+                    <span>Yopougon (Maroc, Selmer, Niangon)</span>
+                    <span>Marcory (Zone 4, Hibiscus)</span>
+                    <span>Plateau</span>
+                    <span>Koumassi</span>
+                    <span>Treichville</span>
+                    <span>Port-Bouët</span>
+                    <span>Abobo</span>
+                    <span>Adjamé</span>
+                    <span>Attécoubé</span>
+                    <span>Bingerville</span>
+                </div>
+                <p style="margin-top:1.5rem; font-weight:700; color:var(--dark);">Frais : 1 500 à 2 500 FCFA (Offert dès 70 000 FCFA d'achat)</p>
+            </div>
+
+            <div class="delivery-card">
+                <h3><i class="fas fa-bus"></i> Intérieur du Pays (48H)</h3>
+                <p>Expédition sécurisée par les compagnies de transport réputées (UTB, CTE, AVS, etc.) avec retrait en gare.</p>
+                <div class="city-chips">
+                    <span>Bouaké</span>
+                    <span>Yamoussoukro</span>
+                    <span>San-Pédro</span>
+                    <span>Korhogo</span>
+                    <span>Daloa</span>
+                    <span>Man</span>
+                    <span>Gagnoa</span>
+                    <span>Grand-Bassam</span>
+                    <span>Abengourou</span>
+                </div>
+                <p style="margin-top:1.5rem; font-weight:700; color:var(--dark);">Frais forfaitaires : 3 000 FCFA (Colis suivi)</p>
+            </div>
+        </div>
+
+        <!-- Badges officiels de paiement ivoirien -->
+        <div class="payment-methods-showcase">
+            <div class="payment-badge-ci wave">
+                <i class="fas fa-water"></i> Wave Côte d'Ivoire (0% frais)
+            </div>
+            <div class="payment-badge-ci orange">
+                <i class="fas fa-mobile"></i> Orange Money CI (#144#)
+            </div>
+            <div class="payment-badge-ci mtn">
+                <i class="fas fa-bolt"></i> MTN Mobile Money (*133#)
+            </div>
+            <div class="payment-badge-ci cash">
+                <i class="fas fa-hand-holding-usd"></i> Cash à la Livraison (Abidjan)
+            </div>
+        </div>
+    </section>
+    <!-- Section Livraison & Paiement Ends -->
+
+    <!-- Review Section Starts (Avis Clients Réels de Côte d'Ivoire) -->
+    <section class="review" id="review">
+        <h1 class="heading">Avis <span>Clients Abidjan</span>
+            <p class="subheading">Découvrez les retours authentiques de nos sneakerheads à travers la Côte d'Ivoire</p>
+        </h1>
+
+        <div class="box-container">
+            <div class="box">
+                <div class="user-info">
+                    <div class="avatar">KM</div>
+                    <div class="user-details">
+                        <h3>Kouassi Marc</h3>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Cocody Angré 8ème Tranche</div>
+                    </div>
+                </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p>"Franchement le service est trop rapide ! J'ai commandé la Nike Shox TL à 11h, à 14h le livreur était déjà chez moi à Angré. J'ai payé direct avec mon Wave. La paire est 100% conforme, rien à dire !"</p>
+                <div class="verified-badge"><i class="fas fa-check-circle"></i> Achat vérifié KICKORA</div>
+            </div>
+
+            <div class="box">
+                <div class="user-info">
+                    <div class="avatar">AK</div>
+                    <div class="user-details">
+                        <h3>Aïcha Koné</h3>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Marcory Zone 4</div>
+                    </div>
+                </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p>"J'avais peur pour la pointure, mais le service client WhatsApp m'a super bien conseillée. J'ai pris la Air Max 270 en pointure 39, c'est comme sur des roulettes ! Le paiement Orange Money était instantané."</p>
+                <div class="verified-badge"><i class="fas fa-check-circle"></i> Achat vérifié KICKORA</div>
+            </div>
+
+            <div class="box">
+                <div class="user-info">
+                    <div class="avatar">CB</div>
+                    <div class="user-details">
+                        <h3>Cédric Bahi</h3>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Yopougon Maroc</div>
+                    </div>
+                </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p>"La Jordan 1 High Royal est trop lourde frérot ! Le livreur est venu jusqu'à Yopougon Maroc carrefour Lubafrique, j'ai essayé devant lui avant de donner le cash. Sérieux et propre, force à KICKORA."</p>
+                <div class="verified-badge"><i class="fas fa-check-circle"></i> Achat vérifié KICKORA</div>
+            </div>
+        </div>
+    </section>
+    <!-- Review Section Ends -->
+
+    <!-- Newsletter Section Starts -->
+    <section class="newsletter">
+        <div class="content">
+            <h3>Rejoignez le <span>Club VIP KICKORA</span></h3>
+            <p>Recevez les alertes des nouveaux arrivages exclusifs et bénéficiez de codes promos de <strong>5 000 FCFA</strong> sur votre prochaine paire par SMS & WhatsApp.</p>
+            <form onsubmit="event.preventDefault(); showToast('🎉 Bienvenue dans le Club VIP KICKORA Abidjan !', 'success');">
+                <input type="text" placeholder="Entrez votre numéro WhatsApp ou Email..." class="box" required>
+                <input type="submit" value="Rejoindre le Club" class="btn">
+            </form>
+        </div>
+    </section>
+    <!-- Newsletter Section Ends -->
+
+    <!-- Footer Section Starts -->
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Nos Points Retrait</h3>
+                <p><i class="fas fa-store" style="color:var(--orange-ci); margin-right:0.6rem;"></i> Abidjan Cocody Angré 8ème Tranche</p>
+                <p><i class="fas fa-store" style="color:var(--orange-ci); margin-right:0.6rem;"></i> Plateau Avenue Chardy</p>
+                <p><i class="fas fa-store" style="color:var(--orange-ci); margin-right:0.6rem;"></i> Marcory Boulevard VGE</p>
+                <p><i class="fas fa-phone-alt" style="color:var(--orange-ci); margin-right:0.6rem;"></i> Infoline : +225 07 00 00 00 00</p>
+            </div>
+
+            <div class="box">
+                <h3>Accès Rapide</h3>
+                <a href="#home"><i class="fas fa-chevron-right" style="color:var(--orange-ci); margin-right:0.6rem;"></i> Accueil</a>
+                <a href="#products"><i class="fas fa-chevron-right" style="color:var(--orange-ci); margin-right:0.6rem;"></i> Nouveautés Sneakers</a>
+                <a href="#featured"><i class="fas fa-chevron-right" style="color:var(--orange-ci); margin-right:0.6rem;"></i> Modèles Vedettes</a>
+                <a href="#delivery"><i class="fas fa-chevron-right" style="color:var(--orange-ci); margin-right:0.6rem;"></i> Tarifs Livraison CI</a>
+                <a href="#review"><i class="fas fa-chevron-right" style="color:var(--orange-ci); margin-right:0.6rem;"></i> Avis Vérifiés</a>
+            </div>
+
+            <div class="box">
+                <h3>Services Clients</h3>
+                <a href="javascript:void(0)" onclick="openCartDrawer()"><i class="fas fa-chevron-right" style="color:var(--orange-ci); margin-right:0.6rem;"></i> Mon Panier en cours</a>
+                <a href="javascript:void(0)" onclick="openCheckoutModal()"><i class="fas fa-chevron-right" style="color:var(--orange-ci); margin-right:0.6rem;"></i> Passer une Commande</a>
+                <a href="https://wa.me/2250700000000" target="_blank"><i class="fas fa-chevron-right" style="color:var(--orange-ci); margin-right:0.6rem;"></i> Assistance WhatsApp Direct</a>
+                <a href="javascript:void(0)" onclick="showToast('✅ Tous les articles sont 100% garantis échangeables sous 48h.', 'info')"><i class="fas fa-chevron-right" style="color:var(--orange-ci); margin-right:0.6rem;"></i> Conditions d'Échange</a>
+            </div>
+
+            <div class="box">
+                <h3>Suivez KICKORA</h3>
+                <p>Restez branchés sur les drops et concours sneakers sur nos réseaux officiels :</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank" class="fab fa-facebook-f"></a>
+                    <a href="https://instagram.com" target="_blank" class="fab fa-instagram"></a>
+                    <a href="https://tiktok.com" target="_blank" class="fab fa-tiktok"></a>
+                    <a href="https://wa.me/2250700000000" target="_blank" class="fab fa-whatsapp"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="credit">
+            © 2026 <span>KICKORA Côte d'Ivoire</span> | Le Temple de la Sneaker à Abidjan • Site créé par <a href="https://portfolio-gules-six-86.vercel.app/" target="_blank" rel="noopener noreferrer" style="color:var(--orange-ci); font-weight:800; text-decoration:underline;">Bakayoko Sory</a> 🇨🇮
+        </div>
+    </section>
+    <!-- Footer Section Ends -->
+
+    <!-- =========================================================================
+         TIROIR PANIER COULISSANT (CART DRAWER / OFFCANVAS)
+         ========================================================================= -->
+    <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-bag" style="color:var(--orange-ci); margin-right:0.8rem;"></i> Mon Panier</h3>
+            <div class="close-cart" id="close-cart-btn"><i class="fas fa-times"></i></div>
+        </div>
+
+        <div class="cart-body" id="cart-body">
+            <!-- Rendu dynamique par script.js -->
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-subtotal">
+                <span>Sous-total :</span>
+                <span class="amount" id="cart-subtotal-val">0 FCFA</span>
+            </div>
+            <button class="btn" id="checkout-proceed-btn">
+                <i class="fas fa-lock"></i> Valider ma Commande
+            </button>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         MODAL DE COMMANDE (CHECKOUT MODAL SPÉCIAL CÔTE D'IVOIRE)
+         ========================================================================= -->
+    <div class="checkout-modal-overlay" id="checkout-modal-overlay">
+        <div class="checkout-modal">
+            <div class="checkout-header">
+                <h3>🇨🇮 Finaliser ma Commande KICKORA</h3>
+                <div class="close-checkout" id="close-checkout-btn"><i class="fas fa-times"></i></div>
+            </div>
+
+            <div class="checkout-body">
+                <form id="checkout-form">
+                    
+                    <!-- Coordonnées -->
+                    <div class="form-section-title">
+                        <i class="fas fa-user-circle"></i> 1. Vos Coordonnées
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="checkout-name">Nom complet *</label>
+                            <input type="text" id="checkout-name" placeholder="Ex: Jean-Marc Kouassi" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout-phone">Numéro Téléphone (WhatsApp) *</label>
+                            <input type="tel" id="checkout-phone" placeholder="Ex: 07 00 00 00 00" required>
+                        </div>
+                    </div>
+
+                    <!-- Livraison -->
+                    <div class="form-section-title">
+                        <i class="fas fa-map-marker-alt"></i> 2. Lieu de Livraison en Côte d'Ivoire
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="checkout-city">Ville de destination *</label>
+                            <select id="checkout-city" required>
+                                <option value="Abidjan" selected>Abidjan (Toutes communes)</option>
+                                <option value="Bouaké">Bouaké (Gare UTB/CTE)</option>
+                                <option value="Yamoussoukro">Yamoussoukro</option>
+                                <option value="San-Pédro">San-Pédro</option>
+                                <option value="Korhogo">Korhogo</option>
+                                <option value="Daloa">Daloa</option>
+                                <option value="Man">Man</option>
+                                <option value="Gagnoa">Gagnoa</option>
+                                <option value="Autre">Autre ville de l'intérieur</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="commune-group">
+                            <label for="checkout-commune">Commune d'Abidjan *</label>
+                            <select id="checkout-commune">
+                                <option value="Cocody" selected>Cocody (Angré, Riviera, 2 Plateaux)</option>
+                                <option value="Yopougon">Yopougon (Maroc, Selmer, Niangon)</option>
+                                <option value="Marcory">Marcory (Zone 4, Biétry, Anoumabo)</option>
+                                <option value="Plateau">Plateau (Centre des affaires)</option>
+                                <option value="Koumassi">Koumassi</option>
+                                <option value="Treichville">Treichville</option>
+                                <option value="Port-Bouët">Port-Bouët (Aéroport, Vridi)</option>
+                                <option value="Abobo">Abobo</option>
+                                <option value="Adjamé">Adjamé</option>
+                                <option value="Attécoubé">Attécoubé</option>
+                                <option value="Bingerville">Bingerville</option>
+                                <option value="Songon">Songon</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-grid full">
+                        <div class="form-group">
+                            <label for="checkout-address">Précision d'adresse / Repère connu *</label>
+                            <input type="text" id="checkout-address" placeholder="Ex: Angré 8ème tranche, Carrefour Duncan, Pharmacie..." required>
+                        </div>
+                    </div>
+
+                    <!-- Moyens de paiement -->
+                    <div class="form-section-title">
+                        <i class="fas fa-credit-card"></i> 3. Mode de Paiement Sécurisé
+                    </div>
+                    <div class="payment-selector">
+                        <label class="payment-option wave selected">
+                            <input type="radio" name="payment_method" value="wave" checked>
+                            <div class="opt-icon">🌊</div>
+                            <div>
+                                <div class="opt-text">Wave Côte d'Ivoire</div>
+                                <div class="opt-sub">Paiement instantané 0% frais</div>
+                            </div>
+                        </label>
+
+                        <label class="payment-option om">
+                            <input type="radio" name="payment_method" value="orange_money">
+                            <div class="opt-icon">🟧</div>
+                            <div>
+                                <div class="opt-text">Orange Money CI</div>
+                                <div class="opt-sub">Code USSD #144# / Max it</div>
+                            </div>
+                        </label>
+
+                        <label class="payment-option mtn">
+                            <input type="radio" name="payment_method" value="mtn_money">
+                            <div class="opt-icon">🟨</div>
+                            <div>
+                                <div class="opt-text">MTN Mobile Money</div>
+                                <div class="opt-sub">Code USSD *133# (MoMo)</div>
+                            </div>
+                        </label>
+
+                        <label class="payment-option cash">
+                            <input type="radio" name="payment_method" value="cash">
+                            <div class="opt-icon">💵</div>
+                            <div>
+                                <div class="opt-text">Cash à la Livraison</div>
+                                <div class="opt-sub">Règlement au livreur moto</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Récapitulatif -->
+                    <div class="order-summary-box">
+                        <div class="order-summary-row">
+                            <span>Articles :</span>
+                            <span id="checkout-subtotal">0 FCFA</span>
+                        </div>
+                        <div class="order-summary-row">
+                            <span>Frais de livraison :</span>
+                            <span id="checkout-shipping">1 500 FCFA</span>
+                        </div>
+                        <div class="order-summary-row total">
+                            <span>TOTAL NET :</span>
+                            <span id="checkout-total">0 FCFA</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn" id="checkout-submit-btn" style="width:100%; font-size:1.6rem; padding:1.4rem;">
+                        <i class="fas fa-check-circle"></i> Confirmer & Enregistrer la Commande
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         MODAL SUCCES / INSTRUCTIONS DE PAIEMENT & BOUTON WHATSAPP
+         ========================================================================= -->
+    <div class="checkout-modal-overlay" id="success-modal-overlay">
+        <div class="checkout-modal" style="max-width: 55rem;">
+            <div class="success-modal">
+                <div class="success-icon"><i class="fas fa-check"></i></div>
+                <h3>Commande Enregistrée !</h3>
+                <p style="font-size:1.5rem; color:var(--text-secondary); margin-bottom:1.5rem;">
+                    Merci pour votre confiance chez <strong>KICKORA</strong>. Votre commande a été transmise à notre service logistique.
+                </p>
+
+                <div class="order-ref-badge" id="success-order-ref">KCK-CI-00000</div>
+
+                <div class="payment-instructions-box" id="payment-instructions-content">
+                    <!-- Rempli dynamiquement selon Wave / OM / MTN / Cash -->
+                </div>
+
+                <div id="success-order-details" style="font-size:1.4rem; color:var(--text-secondary); line-height:1.7; margin-bottom:2.5rem; text-align:left; background:var(--gray-bg); padding:1.5rem; border-radius:8px;">
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:1.2rem;">
+                    <a href="#" id="whatsapp-confirm-btn" target="_blank" class="btn btn-whatsapp" style="width:100%; font-size:1.6rem; padding:1.4rem;">
+                        <i class="fab fa-whatsapp" style="font-size:2rem;"></i> Confirmer ma commande sur WhatsApp
+                    </a>
+
+                    <button class="btn btn-secondary" onclick="closeSuccessModal(); window.location.href='#home';" style="width:100%;">
+                        Retour à la Boutique
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteneur des notifications flottantes -->
+    <div class="toast-container"></div>
+
+    <!-- Scripts de la boutique -->
+    <script src="supabase.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
