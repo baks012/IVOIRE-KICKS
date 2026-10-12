@@ -14,7 +14,7 @@
 
 // Configuration boutique
 const KICKORA_STORE = {
-  name: "KICKORA",
+  name: "IVOIRE KICKS",
   whatsappPhone: "2250700000000", // Numéro WhatsApp du vendeur à Abidjan (+225)
   wavePaymentNumber: "07 00 00 00 00", // Numéro Wave marchand
   orangeMoneyCode: "#144#",
@@ -124,6 +124,7 @@ if (menu && navbar) {
 // 2. HERO SLIDER (MODÈLE SOURCE ADAPTÉ)
 // =========================================================================
 const slides = document.querySelectorAll('.slide-container');
+const dots = document.querySelectorAll('.dot');
 let slideIndex = 0;
 let slideInterval;
 
@@ -132,6 +133,13 @@ function showSlide(n) {
   slides.forEach(s => s.classList.remove('active'));
   slideIndex = (n + slides.length) % slides.length;
   slides[slideIndex].classList.add('active');
+  // Synchroniser les dots
+  if (dots && dots.length > 0) {
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === slideIndex);
+      d.setAttribute('aria-selected', i === slideIndex ? 'true' : 'false');
+    });
+  }
 }
 
 function next() {
@@ -149,6 +157,17 @@ function startSlideAutoplay() {
 
 function stopSlideAutoplay() {
   clearInterval(slideInterval);
+}
+
+// Connexion des dots au slider
+if (dots && dots.length > 0) {
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      stopSlideAutoplay();
+      showSlide(parseInt(dot.dataset.index, 10));
+      startSlideAutoplay();
+    });
+  });
 }
 
 const homeSection = document.querySelector('.home');

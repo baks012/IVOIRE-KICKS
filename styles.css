@@ -28,6 +28,15 @@
   --radius-lg: 20px;
   --radius-full: 9999px;
   --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  /* === IVOIRE KICKS Brand Colors === */
+  --ik-red: #E50914;
+  --ik-red-dark: #B5060F;
+  --ik-red-light: rgba(229, 9, 20, 0.10);
+  --ik-blue: #1463F3;
+  --ik-blue-dark: #0F4FC4;
+  --ik-blue-light: rgba(20, 99, 243, 0.10);
+  --ik-black: #111111;
+  --ik-gray: #F4F4F4;
 }
 
 * {
@@ -193,6 +202,7 @@ header {
   border-bottom: 1px solid var(--gray-border);
 }
 
+/* Logo IVOIRE KICKS en image dans le header */
 header .logo {
   display: flex;
   align-items: center;
@@ -203,6 +213,21 @@ header .logo {
   letter-spacing: -1px;
 }
 
+header .logo .logo-img-header {
+  height: 4.4rem;
+  width: auto;
+  max-width: 16rem;
+  object-fit: contain;
+  object-position: left center;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.12));
+  transition: var(--transition);
+}
+
+header .logo:hover .logo-img-header {
+  transform: scale(1.04);
+  filter: drop-shadow(0 4px 10px rgba(229,9,20,0.25));
+}
+
 header .logo .brand-kick {
   color: var(--dark);
 }
@@ -211,8 +236,8 @@ header .logo .brand-ora {
   color: var(--orange-ci);
 }
 
-header .logo img {
-  height: 3.6rem;
+header .logo img.logo-img-header {
+  height: 4.4rem;
   width: auto;
   object-fit: contain;
 }
@@ -345,39 +370,52 @@ header .icons a .badge {
   position: relative;
 }
 
-/* Arrière-plans artistiques d'éclaboussures */
-.home .slide-container:nth-child(1) .slide::before {
+/* Arrière-plans artistiques d'éclaboussures par slide thème */
+.home .slide-container[data-theme="red"] .slide {
+  background: linear-gradient(135deg, #fff8f8 0%, #fff0f0 50%, #fff5f5 100%);
+}
+
+.home .slide-container[data-theme="red"] .slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('images/banner-red-splash.png') no-repeat right center / 55% auto;
+  opacity: 0.20;
+  pointer-events: none;
+}
+
+.home .slide-container[data-theme="blue"] .slide {
+  background: linear-gradient(135deg, #f0f4ff 0%, #e8efff 50%, #f2f6ff 100%);
+}
+
+.home .slide-container[data-theme="blue"] .slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('images/banner-blue-splash.png') no-repeat right center / 55% auto;
+  opacity: 0.20;
+  pointer-events: none;
+}
+
+.home .slide-container[data-theme="mono"] .slide {
+  background: linear-gradient(135deg, #f9f9f9 0%, #f2f2f2 50%, #fafafa 100%);
+}
+
+.home .slide-container[data-theme="mono"] .slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('images/banner-ink-splash.png') no-repeat right center / 55% auto;
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+/* Fallback pour les slides sans data-theme (ancien code) */
+.home .slide-container:not([data-theme]) .slide::before {
   content: '';
   position: absolute;
   inset: 0;
   background: url('images/banner-ink-splash.png') no-repeat right center / contain;
-  opacity: 0.12;
-  pointer-events: none;
-}
-
-.home .slide-container:nth-child(2) .slide::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('images/banner-blue-splash.png') no-repeat right center / contain;
-  opacity: 0.12;
-  pointer-events: none;
-}
-
-.home .slide-container:nth-child(3) .slide::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('images/banner-ink-splash.png') no-repeat right center / contain;
-  opacity: 0.12;
-  pointer-events: none;
-}
-
-.home .slide-container:nth-child(4) .slide::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('images/banner-red-splash.png') no-repeat right center / contain;
   opacity: 0.12;
   pointer-events: none;
 }
@@ -494,6 +532,210 @@ header .icons a .badge {
   }
 }
 
+/* =========================================================================
+   IVOIRE KICKS — HERO BRAND LOGO (Logo dans chaque slide)
+   ========================================================================= */
+.hero-brand-logo {
+  margin-bottom: 1.6rem;
+}
+
+.hero-logo-img {
+  height: 6rem;
+  width: auto;
+  max-width: 22rem;
+  object-fit: contain;
+  object-position: left center;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+  animation: logoFadeIn 0.5s ease backwards;
+}
+
+@keyframes logoFadeIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* =========================================================================
+   IVOIRE KICKS — SLIDE DOTS (Indicateurs de diapositives)
+   ========================================================================= */
+.slide-dots {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.dot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: var(--radius-full);
+  background: rgba(0,0,0,0.25);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  width: 2.8rem;
+  background: var(--ik-red);
+  border-radius: 5px;
+}
+
+.home .slide-container[data-theme="blue"].active ~ .slide-dots .dot.active,
+.slide-dots .dot.active[data-index="1"] {
+  background: var(--ik-blue);
+}
+
+.dot:focus-visible {
+  outline: 2px solid var(--ik-red);
+  outline-offset: 2px;
+}
+
+/* =========================================================================
+   IVOIRE KICKS — TAGS COLORÉS PAR SLIDE
+   ========================================================================= */
+.home .slide-container .slide .content .tag-red {
+  background: var(--ik-red-light);
+  color: var(--ik-red);
+}
+
+.home .slide-container .slide .content .tag-blue {
+  background: var(--ik-blue-light);
+  color: var(--ik-blue);
+}
+
+.home .slide-container .slide .content .tag-mono {
+  background: rgba(17,17,17,0.08);
+  color: var(--ik-black);
+}
+
+/* =========================================================================
+   IVOIRE KICKS — BOUTONS HERO THÉMATIQUES
+   ========================================================================= */
+.btn-hero-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 1.2rem 2.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--ik-red);
+  color: var(--white);
+  border: 2px solid var(--ik-red);
+  box-shadow: 0 4px 16px rgba(229,9,20,0.30);
+}
+
+.btn-hero-primary:hover {
+  background: var(--ik-red-dark);
+  border-color: var(--ik-red-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(229,9,20,0.40);
+}
+
+.btn-hero-blue {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 1.2rem 2.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--ik-blue);
+  color: var(--white);
+  border: 2px solid var(--ik-blue);
+  box-shadow: 0 4px 16px rgba(20,99,243,0.28);
+}
+
+.btn-hero-blue:hover {
+  background: var(--ik-blue-dark);
+  border-color: var(--ik-blue-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(20,99,243,0.38);
+}
+
+.btn-hero-mono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 1.2rem 2.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--ik-black);
+  color: var(--white);
+  border: 2px solid var(--ik-black);
+  box-shadow: 0 4px 16px rgba(17,17,17,0.25);
+}
+
+.btn-hero-mono:hover {
+  background: #333;
+  border-color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(17,17,17,0.35);
+}
+
+/* Titre h3 du hero coloré selon thème */
+.home .slide-container[data-theme="red"] .slide .content h3 {
+  color: var(--ik-black);
+}
+
+.home .slide-container[data-theme="blue"] .slide .content h3 {
+  color: var(--ik-black);
+}
+
+.home .slide-container[data-theme="mono"] .slide .content h3 {
+  color: var(--ik-black);
+}
+
+/* Soulignement coloré du titre h3 selon thème */
+.home .slide-container[data-theme="red"] .slide .content h3::after {
+  content: '';
+  display: block;
+  width: 6rem;
+  height: 4px;
+  background: var(--ik-red);
+  border-radius: 2px;
+  margin-top: 0.8rem;
+}
+
+.home .slide-container[data-theme="blue"] .slide .content h3::after {
+  content: '';
+  display: block;
+  width: 6rem;
+  height: 4px;
+  background: var(--ik-blue);
+  border-radius: 2px;
+  margin-top: 0.8rem;
+}
+
+.home .slide-container[data-theme="mono"] .slide .content h3::after {
+  content: '';
+  display: block;
+  width: 6rem;
+  height: 4px;
+  background: var(--ik-black);
+  border-radius: 2px;
+  margin-top: 0.8rem;
+}
+
+/* Prev/Next arrow buttons accessibles */
 .home #prev,
 .home #next {
   position: absolute;
@@ -516,9 +758,16 @@ header .icons a .badge {
 .home #prev:hover,
 .home #next:hover {
   color: var(--white);
-  background: var(--orange-ci);
-  border-color: var(--orange-ci);
+  background: var(--ik-red);
+  border-color: var(--ik-red);
   transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 6px 18px rgba(229,9,20,0.35);
+}
+
+.home #prev:focus-visible,
+.home #next:focus-visible {
+  outline: 3px solid var(--ik-red);
+  outline-offset: 2px;
 }
 
 .home #prev {
@@ -530,11 +779,109 @@ header .icons a .badge {
 }
 
 /* =========================================================================
+   IVOIRE KICKS — BADGE CI DANS LE HEADER (Logo zone)
+   ========================================================================= */
+.badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: linear-gradient(135deg, var(--ik-red-light), var(--ik-blue-light));
+  color: var(--dark);
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(229,9,20,0.2);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+/* =========================================================================
+   IVOIRE KICKS — PRIX HERO DANS LES SLIDES
+   ========================================================================= */
+.price-hero {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.6rem 0 2rem;
+  flex-wrap: wrap;
+}
+
+.price-hero .current {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--ik-red);
+  letter-spacing: -0.5px;
+}
+
+.home .slide-container[data-theme="blue"] .price-hero .current {
+  color: var(--ik-blue);
+}
+
+.home .slide-container[data-theme="mono"] .price-hero .current {
+  color: var(--ik-black);
+}
+
+.price-hero .old {
+  font-size: 1.8rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.price-hero .badge-promo {
+  display: inline-block;
+  background: var(--ik-red);
+  color: var(--white);
+  font-size: 1.1rem;
+  font-weight: 800;
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.home .slide-container[data-theme="blue"] .price-hero .badge-promo {
+  background: var(--ik-blue);
+}
+
+.home .slide-container[data-theme="mono"] .price-hero .badge-promo {
+  background: var(--ik-black);
+}
+
+/* =========================================================================
+   IVOIRE KICKS — GROUPE DE BOUTONS CTA HERO
+   ========================================================================= */
+.cta-group {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+}
+
+.cta-group .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1.2rem 2.8rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+/* =========================================================================
    SECTION SERVICES (100% Adapté à la Côte d'Ivoire)
    ========================================================================= */
 .service {
   padding-top: 1rem;
 }
+
 
 .service .box-container {
   display: grid;
